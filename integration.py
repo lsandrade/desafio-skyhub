@@ -1,10 +1,12 @@
 
 class Integration:
-	orders = []
+	
+	def __init__(self):
+		self.orders = []
 
 	def set_input(self,input):
 		if input == None or input == []:
-			raise Exception('You must pass a valid array')
+			raise Exception('You must pass a valid array with integers or doubles')
 		self.input = input
 
 	def get_size_input(self):
@@ -24,7 +26,6 @@ class Integration:
 
 	def get_totals(self):
 		return self.input[2]
-
 
 	def integrate(self,t_index,solutions):
 		totals = sorted(self.get_totals())
