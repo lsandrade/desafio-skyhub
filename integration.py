@@ -5,18 +5,19 @@ class Integration:
 		self.orders = []
 
 	def set_input(self,input):
-		if input == None or input == []:
-			raise Exception('You must pass a valid array with integers or doubles')
+		if len(input) != 3:
+			raise Exception("You must pass 3 arrays.")
+
+		if len(input[0]) != len(input[1]) or len(input[1]) != len(input[2]) or len(input[0]) != len(input[2]):
+			raise Exception("Your arrays must have the same size.")
+
+		if input == None or input == [] or isinstance(input[0], str) or isinstance(input[1], str) or isinstance(input[2], str):
+			raise Exception('You must pass a valid array with integers or doubles.')
 		self.input = input
+
 
 	def get_size_input(self):
 		return len(self.input)
-
-	def is_input_homogeneous(self):
-		if len(self.input[0]) == len(self.input[1]) and len(self.input[1])==len(self.input[2]):
-			return True
-		else:
-			return False
 
 	def get_freight(self):
 		return self.input[0]

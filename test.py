@@ -8,17 +8,12 @@ class IntegrationTest(unittest.TestCase):
 	def test_instance_of_integration(self):
 		self.assertIsInstance(self.i,Integration,"Not a Integration.")
 
-	def test_size_input(self):
-		self.i.set_input(self.input)
-		self.assertEqual(3,self.i.get_size_input(),"Your input must contain 3 arrays.")
+	def test_size_input_with_error(self):
+		self.assertRaises(Exception,self.i.set_input,[[12,1],[1,3]])
 
-	def test_homogeneously_input(self):
-		self.i.set_input(self.input)
-		self.assertTrue(self.i.is_input_homogeneous(),"Arrays must have the same size.")
-
+	def test_homogeneously_input_with_error(self):
 		wrong_input = [[3,2,1],[1,2],[1]]
-		self.i.set_input(wrong_input)
-		self.assertFalse(self.i.is_input_homogeneous(),"Arrays must have the same size.")
+		self.assertRaises(Exception, self.i.set_input,wrong_input)
 
 	def test_get_freight(self):
 		self.i.set_input(self.input)
@@ -51,18 +46,20 @@ class IntegrationTest(unittest.TestCase):
 	def test_empty_array(self):
 		self.assertRaises(Exception, self.i.set_input,[])
 
+	def test_string_array(self):
+		self.assertRaises(Exception, self.i.set_input,['a','2','c'])
+		self.assertRaises(Exception, self.i.set_input,['a','b',1])
+		self.assertRaises(Exception, self.i.set_input,['a',1,'c'])
+
 	# testar array com doubles
 	def test_doubles(self):
 		d_input = [[20.1,25.2], [25.0,30.3], [45.1,55.5]]
 		d_expected = [[20.1,25.0,45.1],[25.2,30.3,55.5]]
 		d = Integration()
 		d.set_input(d_input)
-		self.assertEqual(3,d.get_size_input(),"Your input must contain 3 arrays.")
-		self.assertTrue(d.is_input_homogeneous(),"Arrays must have the same size.")
 		d_result = d.integrate(0,[])
 		d.set_orders(d_result)
-		self.assertEqual(d_expected,d.get_orders(),"Result doesn't match")	
-
+		self.assertEqual(d_expected,d.get_orders(),"Result doesn't match")
 
 	# testar para todos os tamanhos de arrays
 
