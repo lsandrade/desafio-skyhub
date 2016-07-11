@@ -21,21 +21,24 @@ class Integration:
 	def get_size_input(self):
 		return len(self.input)
 
+	# array de fretes
 	def get_freight(self):
 		return self.input[0]
 
+	# array de preços de itens
 	def get_itens_prices(self):
 		return self.input[1]
 
+	# array de totais
 	def get_totals(self):
 		return self.input[2]
 
 	"""
 	Método que realiza a integração.
 	Parametros: indice total e soluções. 
-	Retorna: array com soluções 
-		Os valores são: [indice_total,indice_frete,indice_itens]
-		Ex: [[1,2],[1,3],[3,4]]. Deve retornar: [[0,1,0],[1,0,1]]
+	Retorna: array com soluções ordenados pelo total de maneira crescente.
+		Os valores são: [indice_frete,indice_itens]
+		Ex: [[1,2],[1,3],[3,4]]. Deve retornar: [[1,0],[0,1]]
 	Funcionamento: Percorre os arrays de fretes e itens procurando combinações com valor total, eliminando soluções já encontradas anteriormente. Uma vez encontrado um match, tenta o próximo total. Caso não haja match, volta e tenta a próxima combinação para o total anterior.
 	Ideia: Algoritmo de Backtracking
 	"""
