@@ -1,3 +1,4 @@
 
-def integration():
-	return 1
+class Integration:
+	def integrate(self):
+		return 1
