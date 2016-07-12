@@ -12,9 +12,8 @@ itens = [float(x) for x in input[1].split(',')]
 totais = [float(x) for x in input[2].split(',')]
 
 input = [fretes,itens,totais]
-
 i = Integration()
 i.set_input(input)
-result = i.integrate(0,[])
-i.set_orders(result)
+i.integrate(0,[])
+i.set_orders(i.get_solutions())
 i.pretty_print()

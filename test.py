@@ -39,15 +39,17 @@ class IntegrationTest(unittest.TestCase):
 
 	# teste se 3 valores 'combinam' (se a soma dos 2 primeiros da o terceiro)
 	def test_match(self):
-		self.assertTrue(self.i.match(1,1,2),"Doesn't match.")
-		self.assertFalse(self.i.match(1,1,3),"Doesn't match.")
+		self.assertEqual(0,self.i.match(1,1,2),"Doesn't match.")
+		self.assertEqual(-1,self.i.match(1,1,3),"Doesn't match.")
+		self.assertEqual(1,self.i.match(1,4,3),"Doesn't match.")
 
 
 	# teste médodo de integração
 	def test_integrate(self):
 		expected = [[25,25,50],[20,40,60],[40,30,70],[50,50,100],[45,60,105]]
 		self.i.set_input(self.input)
-		result = self.i.integrate(0,[])
+		self.i.integrate(0,[])
+		result = self.i.get_solutions()
 		self.i.set_orders(result)
 		self.assertEqual(expected,self.i.get_orders(),"Result doesn't match")		
 
@@ -70,9 +72,19 @@ class IntegrationTest(unittest.TestCase):
 		d_expected = [[20.1,25.0,45.1],[25.2,30.3,55.5]]
 		d = Integration()
 		d.set_input(d_input)
-		d_result = d.integrate(0,[])
+		d.integrate(0,[])
+		d_result = d.get_solutions()
 		d.set_orders(d_result)
 		self.assertEqual(d_expected,d.get_orders(),"Result doesn't match")
+
+	# testar valores de indices que podem estar no array de solutions
+	def test_verify_in_solutions(self):
+		solutions = [[0,1],[1,2]]
+		self.assertTrue(self.i.verify_in_solutions(1,1,solutions),"This number sould be in solutions.")
+		self.assertTrue(self.i.verify_in_solutions(1,0,solutions),"This number sould be in solutions.")
+		self.assertTrue(self.i.verify_in_solutions(0,1,solutions),"This number sould be in solutions.")
+		self.assertTrue(self.i.verify_in_solutions(2,0,solutions),"This number sould be in solutions.")
+		self.assertFalse(self.i.verify_in_solutions(0,2,solutions),"This number souldn't be in solutions.")
 
 	
 if __name__ == '__main__':
