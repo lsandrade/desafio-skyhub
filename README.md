@@ -49,5 +49,5 @@ Exemplo:
 
 2- Foi utlizada a lingagem Python pois estou mais habituado com testes nessa linguagem
 
-3- A solução cobre todos os tamanhos possíveis de requisição propostos (5, 10, 20, 50, 100)
+3- A solução cobre os tamanhos até 20 requisições. Para 50 e 100 é sugerido otimizar o método integrate com algoritmo branch and bound.
 ```
